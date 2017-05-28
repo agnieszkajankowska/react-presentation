@@ -10,6 +10,17 @@ export class Contacts extends React.Component {
             surname: '',
             contacts: ''
         }
+
+        this.handleSubmit = (event) => {
+            event.preventDefault()
+            this.setState({
+                contacts: this.state.contacts.concat({
+                    id: new Date().getTime(),
+                    name: this.state.name,
+                    surname: this.state.surname
+                })
+            })
+        }
     }
 
     componentWillMount() {
@@ -25,7 +36,7 @@ export class Contacts extends React.Component {
         return (
             <div>
                 <h1>Contacts</h1>
-                <Form horizontal>
+                <Form horizontal onSubmit={this.handleSubmit}>
                     <FormGroup controlId="formInlineName">
                         <ControlLabel>Name</ControlLabel>
                         {' '}
@@ -33,8 +44,8 @@ export class Contacts extends React.Component {
                                      placeholder="Enter contact name"
                                      onChange={event =>
                                          this.setState({
-                                         name: event.target.value
-                                     })
+                                             name: event.target.value
+                                         })
                                      }
                         />
                     </FormGroup>
