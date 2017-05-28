@@ -6,6 +6,8 @@ export class Contacts extends React.Component {
     constructor() {
         super()
         this.state = {
+            name: '',
+            surname: '',
             contacts: ''
         }
     }
@@ -27,18 +29,34 @@ export class Contacts extends React.Component {
                     <FormGroup controlId="formInlineName">
                         <ControlLabel>Name</ControlLabel>
                         {' '}
-                        <FormControl type="text" placeholder="Enter contact name"/>
+                        <FormControl type="text"
+                                     placeholder="Enter contact name"
+                                     onChange={event =>
+                                         this.setState({
+                                         name: event.target.value
+                                     })
+                                     }
+                        />
                     </FormGroup>
                     {' '}
                     <FormGroup controlId="formInlineSurname">
                         <ControlLabel>Surname</ControlLabel>
                         {' '}
-                        <FormControl type="text" placeholder="Enter contact surname"/>
+                        <FormControl type="text"
+                                     placeholder="Enter contact surname"
+                                     onChange={event =>
+                                         this.setState({
+                                             surname: event.target.value
+                                         })
+                                     }
+                        />
                     </FormGroup>
                     <Button type="submit">
                         Add contact
                     </Button>
                 </Form>
+                <h2>{this.state.name}</h2>
+                <h2>{this.state.surname}</h2>
                 <h3>All users</h3>
                 {
                     !contacts ? '' :
