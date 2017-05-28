@@ -10,7 +10,7 @@ export class Contacts extends React.Component {
         }
     }
 
-    componentWillMount(){
+    componentWillMount() {
         console.log('component will mount')
         fetch(process.env.PUBLIC_URL + '/data/contacts.json')
             .then(response => response.json())
@@ -19,6 +19,7 @@ export class Contacts extends React.Component {
 
     render() {
         console.log("state.contacts", this.state.contacts)
+        const contacts = this.state.contacts
         return (
             <div>
                 <h1>Contacts</h1>
@@ -26,18 +27,29 @@ export class Contacts extends React.Component {
                     <FormGroup controlId="formInlineName">
                         <ControlLabel>Name</ControlLabel>
                         {' '}
-                        <FormControl type="text" placeholder="Enter contact name" />
+                        <FormControl type="text" placeholder="Enter contact name"/>
                     </FormGroup>
                     {' '}
                     <FormGroup controlId="formInlineSurname">
                         <ControlLabel>Surname</ControlLabel>
                         {' '}
-                        <FormControl type="text" placeholder="Enter contact surname" />
+                        <FormControl type="text" placeholder="Enter contact surname"/>
                     </FormGroup>
                     <Button type="submit">
                         Add contact
                     </Button>
                 </Form>
+                <h3>All users</h3>
+                {
+                    !contacts ? '' :
+                        <ul>
+                            {
+                                contacts.map(
+                                    user => <li key={user.id}>{user.name} {user.surname}</li>
+                                )
+                            }
+                        </ul>
+                }
             </div>
         )
     }
