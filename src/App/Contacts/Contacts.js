@@ -21,6 +21,14 @@ export class Contacts extends React.Component {
                 })
             })
         }
+
+        this.handleRemoveContact = (contactId) => {
+            this.setState({
+                contacts: this.state.contacts.filter(
+                    user => user.id !== contactId
+                )
+            })
+        }
     }
 
     componentWillMount() {
@@ -74,7 +82,12 @@ export class Contacts extends React.Component {
                         <ul>
                             {
                                 contacts.map(
-                                    user => <li key={user.id}>{user.name} {user.surname}</li>
+                                    user =>
+                                        <li key={user.id}>{user.name} {user.surname}
+                                            <Button bsStyle="danger"
+                                                    onClick={() => this.handleRemoveContact(user.id)}
+                                            >Remove</Button>
+                                        </li>
                                 )
                             }
                         </ul>
